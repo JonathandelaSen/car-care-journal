@@ -1,10 +1,10 @@
 import Link from "next/link"
 import { SmtpMessage } from "../smtp-message"
 import { forgotPasswordAction } from "@/sections/auth/actions/forgot_password_action"
-import { FormMessage, Message } from "@/components/form-message"
-import { Label } from "@/components/ui/label"
-import { Input } from "@/components/ui/input"
-import { SubmitButton } from "@/components/submit-button"
+import { FormMessage, Message } from "@/sections/shared/components/form-message"
+import { Label } from "@/sections/shared/components/ui/label"
+import { Input } from "@/sections/shared/components/ui/input"
+import { SubmitButton } from "@/sections/shared/components/submit-button"
 
 export default async function ForgotPassword(props: {
   searchParams: Promise<Message>

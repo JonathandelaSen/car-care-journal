@@ -3,10 +3,10 @@ import { Geist } from "next/font/google"
 import { ThemeProvider } from "next-themes"
 import Link from "next/link"
 import "./globals.css"
-import DeployButton from "@/components/deploy-button"
-import { EnvVarWarning } from "@/components/env-var-warning"
-import HeaderAuth from "@/components/header-auth"
-import { ThemeSwitcher } from "@/components/theme-switcher"
+import DeployButton from "@/sections/shared/components/deploy-button"
+import { EnvVarWarning } from "@/sections/shared/components/env-var-warning"
+import HeaderAuth from "@/sections/shared/components/header-auth"
+import { ThemeSwitcher } from "@/sections/shared/components/theme-switcher"
 
 const defaultUrl = process.env.VERCEL_URL
   ? `https://${process.env.VERCEL_URL}`
