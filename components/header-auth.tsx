@@ -1,16 +1,16 @@
-import { signOutAction } from "@/app/actions";
-import { hasEnvVars } from "@/utils/supabase/check-env-vars";
-import Link from "next/link";
-import { Badge } from "./ui/badge";
-import { Button } from "./ui/button";
-import { createClient } from "@/utils/supabase/server";
+import { hasEnvVars } from "@/utils/supabase/check-env-vars"
+import Link from "next/link"
+import { Badge } from "./ui/badge"
+import { Button } from "./ui/button"
+import { createClient } from "@/utils/supabase/server"
+import { signOutAction } from "@/sections/auth/actions/sign_out_action"
 
 export default async function AuthButton() {
-  const supabase = await createClient();
+  const supabase = await createClient()
 
   const {
     data: { user },
-  } = await supabase.auth.getUser();
+  } = await supabase.auth.getUser()
 
   if (!hasEnvVars) {
     return (
@@ -46,7 +46,7 @@ export default async function AuthButton() {
           </div>
         </div>
       </>
-    );
+    )
   }
   return user ? (
     <div className="flex items-center gap-4">
@@ -66,5 +66,5 @@ export default async function AuthButton() {
         <Link href="/sign-up">Sign up</Link>
       </Button>
     </div>
-  );
+  )
 }
