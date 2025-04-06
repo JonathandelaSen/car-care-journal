@@ -1,7 +1,5 @@
-export class User {
-  constructor(
-    readonly id: string,
-    readonly name: string,
-    readonly email: string,
-  ) {}
+export type User = {
+  id: string
+  name: string
+  email: string
 }

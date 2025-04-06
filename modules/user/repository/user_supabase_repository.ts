@@ -12,7 +12,7 @@ export class UserSupabaseRepository implements UserRepository {
       throw new Error(error.message)
     }
 
-    return data.map((user) => new User(user.id, user.name, user.email))
+    return data
   }
 
   async getById(userId: string): Promise<User | null> {
@@ -26,6 +26,6 @@ export class UserSupabaseRepository implements UserRepository {
       throw new Error(error.message)
     }
 
-    return data ? new User(data.id, data.name, data.email) : null
+    return data
   }
 }
