@@ -20,6 +20,7 @@ import { Button } from "@/sections/shared/components/ui/button"
 import { Card, CardContent } from "@/sections/shared/components/ui/card"
 import { User } from "@/modules/user/domain/user"
 import { UserInListDetails } from "./user_in_list_details"
+import { CreateEditUserForm } from "./create_edit_user_form"
 
 type ModalType =
   | "create"
@@ -175,15 +176,15 @@ export function UserList({ users }: { users: User[] }) {
         </CardContent>
       </Card>
 
-      {/* {(modalType === "create" || modalType === "edit") && (
-        <UserForm
+      {(modalType === "create" || modalType === "edit") && (
+        <CreateEditUserForm
           user={selectedUser}
           isOpen={true}
           onClose={closeModal}
           onUserCreated={handleUserCreated}
           onUserUpdated={handleUserUpdated}
         />
-      )} */}
+      )}
 
       {modalType === "view" && selectedUser && (
         <UserInListDetails
