@@ -3,7 +3,9 @@
   "scripts": {
     "dev": "next dev",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "supabase:db:push": "npx supabase db push",
+    "supabase:setup:db": "node scripts/create-setup.js"
   },
   "dependencies": {
     "@radix-ui/react-checkbox": "^1.1.1",
@@ -30,6 +32,7 @@
     "tailwind-merge": "^2.5.2",
     "tailwindcss": "3.4.17",
     "tailwindcss-animate": "^1.0.7",
-    "typescript": "5.7.2"
+    "typescript": "5.7.2",
+    "supabase": "^2.20.5"
   }
 }
