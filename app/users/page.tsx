@@ -8,7 +8,6 @@ export default async function ProtectedPage() {
   const userGetter = new UserGetter(new UserSupabaseRepository(supabase))
   const users = await userGetter.getAllUsers()
 
-  console.log(users)
   return (
     <div className="flex-1 w-full flex flex-col gap-12">
       <UserList users={users} />

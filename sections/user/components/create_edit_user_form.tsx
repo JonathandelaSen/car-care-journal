@@ -68,40 +68,25 @@ export function CreateEditUserForm({
   })
 
   const onSubmit = async (values: UserFormValues) => {
-    // setIsSubmitting(true)
-    // try {
-    //   if (isEditing && user) {
-    //     // Update existing user
-    //     const { data, error } = await supabase
-    //       .from("users")
-    //       .update(values)
-    //       .eq("id", user.id)
-    //       .select()
-    //       .single()
-    //     if (error) throw error
-    //     onUserUpdated?.({
-    //       ...data,
-    //       vehiclesCount: user.vehiclesCount,
-    //     })
-    //   } else {
-    //     // Create new user
-    //     const { data, error } = await supabase
-    //       .from("users")
-    //       .insert(values)
-    //       .select()
-    //       .single()
-    //     if (error) throw error
-    //     onUserCreated?.({
-    //       ...data,
-    //       vehiclesCount: 0,
-    //     })
-    //   }
-    // } catch (error) {
-    //   console.error("Error saving user:", error)
-    //   // You could add toast notifications here
-    // } finally {
-    //   setIsSubmitting(false)
-    // }
+    console.log("Form submitted with values:", values)
+    setIsSubmitting(true)
+    try {
+      if (isEditing && user) {
+      } else {
+        onUserCreated?.({
+          id: "123",
+          name: values.name,
+          email: values.email,
+          password: values.password,
+          phone: values.password,
+          address: values.address,
+        })
+      }
+    } catch (error) {
+      console.error("Error saving user:", error)
+    } finally {
+      setIsSubmitting(false)
+    }
   }
 
   return (
@@ -156,6 +141,20 @@ export function CreateEditUserForm({
                   <FormLabel>Phone (optional)</FormLabel>
                   <FormControl>
                     <Input placeholder="+1 (555) 123-4567" {...field} />
+                  </FormControl>
+                  <FormMessage />
+                </FormItem>
+              )}
+            />
+
+            <FormField
+              control={form.control}
+              name="password"
+              render={({ field }) => (
+                <FormItem>
+                  <FormLabel>Password</FormLabel>
+                  <FormControl>
+                    <Input placeholder="****" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>

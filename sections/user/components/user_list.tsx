@@ -1,7 +1,6 @@
 "use client"
 
 import { useState } from "react"
-// import { createClientComponentClient } from "@supabase/auth-helpers-nextjs"
 import { PlusCircle, Pencil, Eye, Car, Wrench, Trash2 } from "lucide-react"
 import {
   Table,
@@ -21,6 +20,7 @@ import { Card, CardContent } from "@/sections/shared/components/ui/card"
 import { User } from "@/modules/user/domain/user"
 import { UserInListDetails } from "./user_in_list_details"
 import { CreateEditUserForm } from "./create_edit_user_form"
+import { useUsers } from "@/sections/user/hooks/use_users"
 
 type ModalType =
   | "create"
@@ -31,30 +31,9 @@ type ModalType =
   | "delete"
   | null
 
-export function UserList({ users }: { users: User[] }) {
-  const [selectedUsers, setSelectedUsers] = useState<User[]>([
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-    ...users,
-  ])
+export function UserList({ users: _users }: { users: User[] }) {
+  const { users, setUsers, addUser } = useUsers(_users)
+
   const [selectedUser, setSelectedUser] = useState<User | null>(null)
   const [modalType, setModalType] = useState<ModalType>(null)
 
@@ -69,21 +48,21 @@ export function UserList({ users }: { users: User[] }) {
   }
 
   const handleUserCreated = (newUser: User) => {
-    setSelectedUsers([...selectedUsers, newUser])
+    console.log(`User created: user`, newUser)
+    setUsers([...users, newUser])
     closeModal()
   }
 
   const handleUserUpdated = (updatedUser: User) => {
-    setSelectedUsers(
-      selectedUsers.map((user) =>
-        user.id === updatedUser.id ? updatedUser : user,
-      ),
+    //addUser(updatedUser)
+    setUsers(
+      users.map((user) => (user.id === updatedUser.id ? updatedUser : user)),
     )
     closeModal()
   }
 
   const handleUserDeleted = (userId: string) => {
-    setSelectedUsers(selectedUsers.filter((user) => user.id !== userId))
+    setUsers(users.filter((user) => user.id !== userId))
     closeModal()
   }
 
@@ -109,7 +88,7 @@ export function UserList({ users }: { users: User[] }) {
               </TableRow>
             </TableHeader>
             <TableBody>
-              {selectedUsers.length === 0 ? (
+              {users.length === 0 ? (
                 <TableRow>
                   <TableCell
                     colSpan={5}
@@ -119,7 +98,7 @@ export function UserList({ users }: { users: User[] }) {
                   </TableCell>
                 </TableRow>
               ) : (
-                selectedUsers.map((user) => (
+                users.map((user) => (
                   <TableRow key={user.id}>
                     <TableCell className="font-medium">{user.name}</TableCell>
                     <TableCell>{user.email}</TableCell>
