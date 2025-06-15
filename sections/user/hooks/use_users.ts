@@ -18,7 +18,7 @@ export function useUsers(initialUsers?: User[]) {
     const client = createClient()
     const userGetter = new UserGetter(new UserSupabaseRepository(client))
     userGetter.getAllUsers().then(setUsers)
-  }, [initialUsers])
+  }, [])
 
   return {
     users,

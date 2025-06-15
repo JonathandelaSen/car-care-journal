@@ -118,7 +118,8 @@ export function UserInListDetails({ user, isOpen, onClose }: UserDetailsProps) {
                         cars.map((car) => (
                           <TableRow key={car.id}>
                             <TableCell className="font-medium">
-                              {car.year} {car.make} {car.model}
+                              {car.make} {car.model}
+                              {car.year}
                             </TableCell>
                           </TableRow>
                         ))

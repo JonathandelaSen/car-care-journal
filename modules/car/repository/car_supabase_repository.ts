@@ -34,7 +34,7 @@ export class CarSupabaseRepository implements CarRepository {
   async create(car: Car): Promise<Car> {
     const { data, error } = await this.supabase
       .from("cars")
-      .insert(car)
+      .insert(this.toDb(car))
       .select("*")
       .single()
 
@@ -64,6 +64,30 @@ export class CarSupabaseRepository implements CarRepository {
 
     if (error) {
       throw new Error(error.message)
+    }
+  }
+
+  private toDb(car: Car): any {
+    console.log("toDb", car)
+    console.log({
+      make: car.make,
+      model: car.model,
+      year: car.year,
+      created_at: car.createdAt,
+      updated_at: car.updatedAt,
+      owner_id: car.ownerId,
+      description: car.description,
+      image_url: car.imageUrl,
+    })
+    return {
+      make: car.make,
+      model: car.model,
+      year: car.year,
+      created_at: car.createdAt,
+      updated_at: car.updatedAt,
+      owner_id: car.ownerId,
+      description: car.description,
+      image_url: car.imageUrl,
     }
   }
 }

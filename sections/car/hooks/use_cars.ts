@@ -3,9 +3,10 @@ import { createClient } from "@/utils/supabase/client"
 import { useCarStore } from "../store/car_store"
 import { CarGetter } from "@/modules/car/application/car_getter"
 import { CarSupabaseRepository } from "@/modules/car/repository/car_supabase_repository"
+import { Car } from "@/modules/car/domain/car"
 
 export function useCars(ownerId: string) {
-  const { addCar, cars, setCars } = useCarStore()
+  const { cars, setCars } = useCarStore()
 
   useEffect(() => {
     setCars([])
@@ -19,7 +20,5 @@ export function useCars(ownerId: string) {
 
   return {
     cars,
-    setCars,
-    addCar,
   }
 }
