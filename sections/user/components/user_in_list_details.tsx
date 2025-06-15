@@ -21,6 +21,15 @@ import {
   TabsList,
   TabsTrigger,
 } from "@/sections/shared/components/ui/tabs"
+import { useCars } from "@/sections/car/hooks/use_cars"
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/sections/shared/components/ui/table"
 
 interface UserDetailsProps {
   user: User
@@ -29,6 +38,8 @@ interface UserDetailsProps {
 }
 
 export function UserInListDetails({ user, isOpen, onClose }: UserDetailsProps) {
+  const { cars, setCars, addCar } = useCars(user.id)
+
   return (
     <Dialog open={isOpen} onOpenChange={(open: boolean) => !open && onClose()}>
       <DialogContent className="sm:max-w-[700px]">
@@ -77,82 +88,37 @@ export function UserInListDetails({ user, isOpen, onClose }: UserDetailsProps) {
                 <TabsTrigger value="revisions">Revisions 2</TabsTrigger>
               </TabsList>
 
-              {/* <TabsContent value="vehicles">
-                {vehicles.length === 0 ? (
-                  <p className="text-center py-4 text-muted-foreground">
-                    No vehicles found for this user.
-                  </p>
-                ) : (
-                  <div className="grid gap-4">
-                    {vehicles.map((vehicle) => (
-                      <Card key={vehicle.id}>
-                        <CardContent className="p-4">
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <h3 className="font-medium">
-                                {vehicle.year} {vehicle.make} {vehicle.model}
-                              </h3>
-                              <p className="text-sm text-muted-foreground">
-                                License: {vehicle.license_plate}
-                              </p>
-                              {vehicle.vin && (
-                                <p className="text-sm text-muted-foreground">
-                                  VIN: {vehicle.vin}
-                                </p>
-                              )}
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                )}
-              </TabsContent> */}
-
-              {/* <TabsContent value="revisions">
-                {revisions.length === 0 ? (
-                  <p className="text-center py-4 text-muted-foreground">
-                    No revisions found for this user's vehicles.
-                  </p>
-                ) : (
-                  <div className="grid gap-4">
-                    {revisions.map((revision) => (
-                      <Card key={revision.id}>
-                        <CardContent className="p-4">
-                          <div className="flex justify-between items-start">
-                            <div>
-                              <div className="flex items-center gap-2">
-                                <h3 className="font-medium">{revision.type}</h3>
-                                <span className="text-sm text-muted-foreground">
-                                  {new Date(revision.date).toLocaleDateString()}
-                                </span>
-                              </div>
-                              <p className="text-sm text-muted-foreground">
-                                Vehicle: {revision.vehicle?.make}{" "}
-                                {revision.vehicle?.model} (
-                                {revision.vehicle?.license_plate})
-                              </p>
-                              <p className="text-sm mt-2">
-                                {revision.description}
-                              </p>
-                              <div className="flex gap-4 mt-2">
-                                <p className="text-sm">
-                                  <span className="font-medium">Mileage:</span>{" "}
-                                  {revision.mileage} km
-                                </p>
-                                <p className="text-sm">
-                                  <span className="font-medium">Cost:</span> $
-                                  {revision.cost.toFixed(2)}
-                                </p>
-                              </div>
-                            </div>
-                          </div>
-                        </CardContent>
-                      </Card>
-                    ))}
-                  </div>
-                )}
-              </TabsContent> */}
+              <Card>
+                <CardContent className="p-0">
+                  <Table>
+                    <TableHeader>
+                      <TableRow>
+                        <TableHead>Car</TableHead>
+                      </TableRow>
+                    </TableHeader>
+                    <TableBody>
+                      {cars.length === 0 ? (
+                        <TableRow>
+                          <TableCell
+                            colSpan={5}
+                            className="text-center py-10 text-muted-foreground"
+                          >
+                            No cars.
+                          </TableCell>
+                        </TableRow>
+                      ) : (
+                        cars.map((car) => (
+                          <TableRow key={car.id}>
+                            <TableCell className="font-medium">
+                              {car.year} {car.make} {car.model}
+                            </TableCell>
+                          </TableRow>
+                        ))
+                      )}
+                    </TableBody>
+                  </Table>
+                </CardContent>
+              </Card>
             </Tabs>
           </div>
         )}
