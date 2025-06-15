@@ -30,6 +30,7 @@ import {
   TableHeader,
   TableRow,
 } from "@/sections/shared/components/ui/table"
+import Link from "next/link"
 
 interface UserDetailsProps {
   user: User
@@ -44,7 +45,14 @@ export function UserInListDetails({ user, isOpen, onClose }: UserDetailsProps) {
     <Dialog open={isOpen} onOpenChange={(open: boolean) => !open && onClose()}>
       <DialogContent className="sm:max-w-[700px]">
         <DialogHeader>
-          <DialogTitle>User Details</DialogTitle>
+          <div className="flex items-center justify-between">
+            <DialogTitle>User Details</DialogTitle>
+            <Link href={`/users/${user.id}`}>
+              <button className="px-4 py-2 text-white rounded hover:bg-blue-900">
+                Ver perfil
+              </button>
+            </Link>
+          </div>
         </DialogHeader>
 
         {user && (
